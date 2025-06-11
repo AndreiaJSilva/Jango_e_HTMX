@@ -1,0 +1,272 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f3f3f3;
+}
+
+nav {
+  background-color: #4a4a4a;
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu > li {
+  position: relative;
+  padding: 15px 20px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.menu > li > a {
+  color: white;
+  text-decoration: none;
+}
+
+.menu > li::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background-color: white;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu > li:hover::after {
+  width: 20px; /* Tamanho da barrinha */
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  background-color: #696969 ;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  list-style: none;
+  padding: 0;
+  min-width: 150px; /* opcional para manter tamanho fixo */
+  text-align: center;
+}
+
+.submenu li a {
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+}
+
+.menu li:hover .submenu {
+  display: block;
+}
+
+.header{
+  text-align: center;
+  padding: 30px;
+}
+
+.header h1 {
+  color: #696969;
+  font-size: 2em;
+}
+
+.header img {
+    width: 500px;
+    border-radius: 10px;
+    margin: 40px;
+}
+
+.imagem-central {
+  max-width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #999;
+}
+
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.container-cadastrar {
+  display: flex;
+  justify-content: flex-end; /* alinha o link à direita */
+  margin-bottom: 1rem; /* espaço opcional */
+}
+
+.titulo {
+  text-align: center;
+  color: #696969;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.item {
+  background-color: white;
+  border-left: 10px solid #4a4a4a;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #ccc;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between; /* Espaça entre o texto e os botões */
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #444;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  }
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-button {
+  padding: 10px 32px;         /* aumenta um pouco a altura e largura */
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;            /* fonte levemente maior */
+  cursor: pointer;
+  transition: background 0.3s;
+  display: block;
+  margin: 20px auto 0 auto;   /* centraliza o botão */
+  width: auto;
+}
+.form-button:hover {
+  background-color: #0056b3;
+}
+.btn-editar, .btn-excluir {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+  text-decoration: none;
+}
+
+.btn-editar {
+  color: #f0c000; /* amarelo */
+}
+
+.btn-editar:hover {
+  color: #d4a900;
+}
+
+.btn-excluir {
+  color: #e63946; /* vermelho */
+}
+
+.btn-excluir:hover {
+  color: #b32b34;
+}
+
+.btn-cadastrar {
+  background: none;
+  border: none;
+  color: #2ecc71; /* verde */
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.btn-cadastrar:hover {
+  color: #27ae60; /* verde escuro no hover */
+}
+
+.excluir-container {
+  max-width: 360px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.excluir-container h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.excluir-container p {
+  margin-bottom: 2rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+.excluir-container form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn-cancelar {
+  color: #555;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  align-self: center;
+}
+
+.btn-cancelar:hover {
+  color: #2ecc71;
+  border-color: #2ecc71;
+}

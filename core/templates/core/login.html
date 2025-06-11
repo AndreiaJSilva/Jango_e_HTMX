@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="form-container">
+  <h2>Login do Usuário</h2>
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+          <div class="error">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn-submit">Entrar</button>
+  </form>
+</div>
+{% endblock %}

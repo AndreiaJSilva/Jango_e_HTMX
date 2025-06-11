@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Teste CSS</title>
+  <link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+
+<body>
+  <header class="top-bar">
+    <h1>Teste Lavras Pharm</h1>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li>Menu
+        <ul>
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Conteúdo de teste</h2>
+    <p>Se você está vendo cores e estilos aplicados, o CSS foi carregado com sucesso!</p>
+  </main>
+</body>
+
+</html>

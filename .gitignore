@@ -1,0 +1,39 @@
+# Ambiente virtual
+venv/
+env/
+
+# Arquivos Python compilados
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Configurações de IDEs
+.vscode/
+.idea/
+
+# Arquivos temporários de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de banco de dados SQLite
+*.sqlite3
+
+# Arquivos de migração (opcional ignorar, mas pode manter se preferir)
+#*/migrations/*.py
+#*/migrations/*.pyc
+
+# Logs e arquivos temporários
+*.log
+*.pot
+*.mo
+
+# Arquivos de configuração sensível (se usar django-environ ou semelhantes)
+.env
+.env.*
+
+# Arquivos de dependências
+pip-log.txt
+
+# Static/media (se forem gerados automaticamente e não versionados)
+staticfiles/
+media/

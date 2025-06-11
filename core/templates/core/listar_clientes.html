@@ -1,0 +1,19 @@
+{% if clientes %}
+<h2>Lista de Clientes</h2>
+{% for cliente in clientes %}
+<div>
+  {{ cliente.nome }} - {{ cliente.cpf }}
+  <a href="{% url 'atualizar_cliente' cliente.id %}" hx-get hx-target="#formulario-edicao"
+    hx-swap="innerHTML">Editar</a>
+  <form hx-post="{% url 'excluir_cliente' cliente.id %}" style="display:inline;" hx-target="#lista-clientes"
+    hx-swap="innerHTML">
+    {% csrf_token %}
+    <button type="submit" onclick="return confirm('Tem certeza?')">Excluir</button>
+  </form>
+</div>
+{% empty %}
+<p>Nenhum cliente cadastrado.</p>
+{% endfor %}
+{% else %}
+<p>Carregando clientes...</p>
+{% endif %}
