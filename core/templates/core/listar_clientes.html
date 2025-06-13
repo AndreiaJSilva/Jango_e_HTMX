@@ -1,19 +1,30 @@
-{% if clientes %}
-<h2>Lista de Clientes</h2>
-{% for cliente in clientes %}
-<div>
-  {{ cliente.nome }} - {{ cliente.cpf }}
-  <a href="{% url 'atualizar_cliente' cliente.id %}" hx-get hx-target="#formulario-edicao"
-    hx-swap="innerHTML">Editar</a>
-  <form hx-post="{% url 'excluir_cliente' cliente.id %}" style="display:inline;" hx-target="#lista-clientes"
-    hx-swap="innerHTML">
-    {% csrf_token %}
-    <button type="submit" onclick="return confirm('Tem certeza?')">Excluir</button>
-  </form>
-</div>
-{% empty %}
-<p>Nenhum cliente cadastrado.</p>
-{% endfor %}
-{% else %}
-<p>Carregando clientes...</p>
-{% endif %}
+{% extends 'core/pesquisa.html' %}
+
+{% block title %}Lista de Clientes{% endblock %}
+{% block titulo_lista %}Clientes Cadastrados{% endblock %}
+{% block placeholder_pesquisa %}Buscar por nome ou CPF{% endblock %}
+{% block url_limpar %}{% url 'listar_clientes' %}{% endblock %}
+
+{% block lista_itens %}
+    {% if clientes %}
+        {% for cliente in clientes %}
+        <div class="item">
+            <span>Nome: {{ cliente.nome }} | CPF: {{ cliente.cpf }}</span>
+            {% if user.is_authenticated %}
+            <span class="acoes">
+                <a href="{% url 'atualizar_cliente' cliente.id %}" class="btn-editar">Editar</a>
+                <a href="{% url 'excluir_cliente' cliente.id %}" class="btn-excluir">Excluir</a>
+            </span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="item">
+            {% if request.GET.search %}
+                Nenhum cliente encontrado para "{{ request.GET.search }}".
+            {% else %}
+                Nenhum cliente cadastrado.
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

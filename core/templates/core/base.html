@@ -5,11 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>{% block title %}Lavras Pharm{% endblock %}</title>
+  <title>{% block title %}Lavras Farm{% endblock %}</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
-  <script src="https://unpkg.com/htmx.org@1.9.6"></script>
 </head>
 
 <body>
@@ -51,7 +50,7 @@
   
       <li>
         {% if user.is_authenticated %}
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        <form method="post" action="{% url 'logout' %}" style="display:inline;" onsubmit="return confirmarSaida()">
           {% csrf_token %}
           <button type="submit" class="logout-link">Sair</button>
         </form>
@@ -63,10 +62,16 @@
   </nav>
 
   <!-- Conteúdo principal -->
-  <main id="principal"> 
+  <main>
     {% block content %}
     {% endblock %}
   </main>
+
+  <script>
+    function confirmarSaida() {
+      return confirm('Tem certeza que deseja sair?');
+    }
+  </script>
 
 </body>
 

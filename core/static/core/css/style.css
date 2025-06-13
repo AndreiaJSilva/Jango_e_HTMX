@@ -42,20 +42,22 @@ nav {
 }
 
 .menu > li:hover::after {
-  width: 20px; /* Tamanho da barrinha */
+  width: 20px;
 }
 
 .submenu {
   display: none;
   position: absolute;
-  background-color: #696969 ;
+  background-color: #696969;
   top: 50px;
   left: 50%;
   transform: translateX(-50%);
   list-style: none;
   padding: 0;
-  min-width: 150px; /* opcional para manter tamanho fixo */
+  min-width: 150px;
   text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .submenu li a {
@@ -63,13 +65,18 @@ nav {
   padding: 10px 20px;
   color: white;
   text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.submenu li a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .menu li:hover .submenu {
   display: block;
 }
 
-.header{
+.header {
   text-align: center;
   padding: 30px;
 }
@@ -77,12 +84,13 @@ nav {
 .header h1 {
   color: #696969;
   font-size: 2em;
+  margin: 0;
 }
 
 .header img {
-    width: 500px;
-    border-radius: 10px;
-    margin: 40px;
+  width: 500px;
+  border-radius: 10px;
+  margin: 40px;
 }
 
 .imagem-central {
@@ -99,93 +107,60 @@ nav {
 
 .container-cadastrar {
   display: flex;
-  justify-content: flex-end; /* alinha o link à direita */
-  margin-bottom: 1rem; /* espaço opcional */
+  justify-content: flex-end;
+  margin-bottom: 1rem;
 }
 
 .titulo {
+  font-size: 26px;
   text-align: center;
   color: #696969;
+  margin-bottom: 30px;
 }
 
 .lista {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 15px;
+}
+
+.lista-header {
+  background-color: #4a4a4a;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 5px;
 }
 
 .item {
   background-color: white;
   border-left: 10px solid #4a4a4a;
-  padding: 15px;
+  padding: 12px;
   border-radius: 8px;
-  box-shadow: 0 0 5px #ccc;
-  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-weight: normal;
   display: flex;
-  justify-content: space-between; /* Espaça entre o texto e os botões */
+  justify-content: space-between;
   align-items: center;
-  padding: 0.6rem 1rem;
   border-bottom: 1px solid #ddd;
   font-size: 1rem;
   color: #444;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.form-container {
-  background-color: #fff;
-  padding: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  }
-
-.form-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #333;
+.item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  color: #555;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.form-group input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.form-button {
-  padding: 10px 32px;         /* aumenta um pouco a altura e largura */
-  background-color: #007bff;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 15px;            /* fonte levemente maior */
-  cursor: pointer;
-  transition: background 0.3s;
-  display: block;
-  margin: 20px auto 0 auto;   /* centraliza o botão */
-  width: auto;
-}
-.form-button:hover {
-  background-color: #0056b3;
-}
-.btn-editar, .btn-excluir {
+.btn-editar,
+.btn-excluir {
   background: none;
   border: none;
   cursor: pointer;
@@ -193,10 +168,11 @@ nav {
   font-size: 1rem;
   padding: 0 0.5rem;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .btn-editar {
-  color: #f0c000; /* amarelo */
+  color: #f0c000;
 }
 
 .btn-editar:hover {
@@ -204,7 +180,7 @@ nav {
 }
 
 .btn-excluir {
-  color: #e63946; /* vermelho */
+  color: #e63946;
 }
 
 .btn-excluir:hover {
@@ -214,7 +190,7 @@ nav {
 .btn-cadastrar {
   background: none;
   border: none;
-  color: #2ecc71; /* verde */
+  color: #2ecc71;
   font-weight: 600;
   font-size: 1rem;
   text-decoration: none;
@@ -224,7 +200,23 @@ nav {
 }
 
 .btn-cadastrar:hover {
-  color: #27ae60; /* verde escuro no hover */
+  color: #27ae60;
+}
+
+.btn-cancelar {
+  color: #555;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  align-self: center;
+}
+
+.btn-cancelar:hover {
+  color: #2ecc71;
+  border-color: #2ecc71;
 }
 
 .excluir-container {
@@ -255,18 +247,79 @@ nav {
   gap: 1rem;
 }
 
-.btn-cancelar {
-  color: #555;
-  text-decoration: none;
-  padding: 0.6rem 1.4rem;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  font-weight: 600;
-  transition: color 0.3s ease, border-color 0.3s ease;
-  align-self: center;
+.search-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.btn-cancelar:hover {
-  color: #2ecc71;
-  border-color: #2ecc71;
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-input {
+  padding: 10px 15px;
+  width: 220px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #1e90ff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn:hover {
+  background-color: #187bcd;
+}
+
+.search-clear {
+  padding: 8px 15px;
+  text-decoration: none;
+  color: #666;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.search-clear:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Botão de Sair */
+.logout-link {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+.logout-link:hover {
+  background-color: #c0392b;
+  transform: translateY(-1px);
 }
