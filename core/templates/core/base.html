@@ -22,12 +22,17 @@
       <li>
         Clientes
         <ul class="submenu">
-          {% if user.is_authenticated %}
-          <li><a href="{% url 'cadastrar_cliente' %}">Cadastrar</a></li>
-          {% endif %}
-          <li><a href="{% url 'listar_clientes' %}">Visualizar Cadastro</a></li>
+          <li>
+            <a href="{% url 'clientes' %}">
+              {% if user.is_authenticated %}
+              Gerenciar Clientes
+              {% else %}
+              Visualizar Clientes
+              {% endif %}
+            </a>
+          </li>
         </ul>
-      </li>
+      </li>      
   
       <li>
         Medicamentos

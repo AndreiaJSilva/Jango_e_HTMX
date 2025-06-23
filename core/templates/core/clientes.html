@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Clientes - Lavras Pharm{% endblock %}
+
+{% block content %}
+<h1>Clientes</h1>
+
+{% if user.is_authenticated %}
+<div id="formulario-cliente">
+  <form hx-post="{% url 'cadastrar_cliente' %}" hx-target="#lista-clientes" hx-swap="outerHTML" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Cadastrar</button>
+  </form>
+</div>
+{% endif %}
+
+<!-- Lista carregada dinamicamente -->
+<div id="lista-clientes" hx-get="{% url 'listar_clientes' %}" hx-trigger="load" hx-swap="outerHTML">
+  <p>Carregando clientes...</p>
+</div>
+{% endblock %}

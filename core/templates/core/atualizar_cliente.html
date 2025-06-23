@@ -18,6 +18,11 @@
       {% endfor %}
       <button type="submit" class="btn-submit">Salvar</button>
 
+      <!-- Botão de cancelar edição -->
+      <button type="button" hx-get="{% url 'formulario_cliente' %}" hx-target="#formulario-cliente" hx-swap="outerHTML">
+        Cancelar
+      </button>
+
     </form>
   </div>
 {% endblock %}

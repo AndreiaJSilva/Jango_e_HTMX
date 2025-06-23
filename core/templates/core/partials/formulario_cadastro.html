@@ -1,0 +1,8 @@
+<div id="formulario-cliente">
+  <h2>Cadastrar Cliente</h2>
+  <form hx-post="{% url 'cadastrar_cliente' %}" hx-target="#lista-clientes" hx-swap="outerHTML" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Cadastrar</button>
+  </form>
+</div>

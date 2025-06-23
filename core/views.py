@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .forms import ClienteForm, MedicamentoForm, CompraForm
 from .models import Cliente, Medicamento, Compra
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 def home(request):
     clientes = Cliente.objects.all()
@@ -13,6 +14,10 @@ def home(request):
         'compras': compras
     })
 
+def clientes(request):
+    form = ClienteForm()
+    return render(request, 'core/clientes.html', {'form': form})
+
 @login_required
 def cadastrar_cliente(request):
     if request.method == 'POST':
@@ -21,40 +26,50 @@ def cadastrar_cliente(request):
             cliente = form.save(commit=False)
             cliente.user = request.user
             cliente.save()
-            if request.headers.get('HX-Request'):  # HTMX detectado
-                clientes = Cliente.objects.all()
-                return render(request, 'core/listar_clientes.html', {'clientes': clientes})
-            return redirect('listar_clientes')
-    else:
-        form = ClienteForm()
-    clientes = Cliente.objects.all()
-    return render(request, 'core/cadastrar_cliente.html', {'form': form, 'clientes': clientes})
+            clientes = Cliente.objects.all()
+            return render(request, 'core/listar_clientes.html', {'clientes': clientes})
+    # Se não for POST, devolve um formulário novo
+    form = ClienteForm()
+    return render(request, 'core/partials/formulario_cliente.html', {'form': form})
+
+def clientes_view(request):
+    form = ClienteForm() if request.user.is_authenticated else None
+    return render(request, 'core/cliente.html', {'form': form})
 
 def listar_clientes(request):
     clientes = Cliente.objects.all()
     return render(request, 'core/listar_clientes.html', {'clientes': clientes})
 
 @login_required
+def formulario_cliente(request):
+    form = ClienteForm()
+    return render(request, 'core/partials/formulario_cadastro.html', {'form': form})
+
+@login_required
 def atualizar_cliente(request, cliente_id):
     cliente = get_object_or_404(Cliente, id=cliente_id)
+
     if request.method == 'POST':
         form = ClienteForm(request.POST, instance=cliente)
         if form.is_valid():
             form.save()
-            return render(request, 'core/listar_clientes.html', {'clientes': Cliente.objects.all()})
+            clientes = Cliente.objects.all()
+            return render(request, 'core/listar_clientes.html', {'clientes': clientes})
     else:
         form = ClienteForm(instance=cliente)
-    return render(request, 'core/atualizar_cliente.html', {'form': form, 'cliente': cliente, 'cliente_id': cliente_id})
+
+    return render(request, 'core/partials/formulario_cliente.html', {
+        'form': form,
+        'cliente': cliente
+    })
 
 @login_required
+@require_POST 
 def excluir_cliente(request, cliente_id):
     cliente = get_object_or_404(Cliente, id=cliente_id)
-    if request.method == 'POST':
-        cliente.delete()
-        # Retorna apenas a lista atualizada como fragmento
-        clientes = Cliente.objects.all()
-        return render(request, 'core/listar_clientes.html', {'clientes': clientes})
-    return render(request, 'core/excluir_cliente.html', {'cliente': cliente})
+    cliente.delete()
+    clientes = Cliente.objects.all()
+    return render(request, 'core/listar_clientes.html', {'clientes': clientes})
 
 @login_required
 def cadastrar_medicamento(request):

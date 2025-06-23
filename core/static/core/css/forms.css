@@ -1,5 +1,15 @@
   /* forms.css - estilo geral para TODOS os formulários */
 
+  #formulario-cliente {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 480px;
+    margin: 30px auto;
+    font-family: Arial, sans-serif;
+  }
+
   .form-container {
     background-color: #fff;
     padding: 30px 40px;
@@ -10,7 +20,7 @@
     font-family: Arial, sans-serif;
   }
 
-  .form-container h2 {
+  #principal {
     text-align: center;
     margin-bottom: 25px;
     color: #333;
@@ -20,16 +30,16 @@
     margin-bottom: 15px;
   }
 
-  .form-group label {
+  #formulario-cliente label {
     display: block;
     margin-bottom: 6px;
     color: #555;
     font-weight: 600;
   }
 
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
+  #formulario-cliente input,
+  #formulario-cliente select,
+  #formulario-cliente textarea {
     width: 100%;
     padding: 10px 14px;
     border-radius: 6px;
@@ -38,14 +48,14 @@
     box-sizing: border-box;
   }
 
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
+  #formulario-cliente input:focus,
+  #formulario-cliente select:focus,
+  #formulario-cliente textarea:focus {
     border-color: #007bff;
     outline: none;
   }
 
-  .btn-submit {
+  form > button, #lista-clientes > div > a {
     display: block;
     width: auto;
     margin: 20px auto 0 auto;

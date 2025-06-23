@@ -1,0 +1,9 @@
+<div id="formulario-cliente">
+  <h2>Editar Cliente</h2>
+  <form hx-post="{% url 'atualizar_cliente' cliente.id %}" hx-target="#lista-clientes" hx-swap="outerHTML"
+    method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+  </form>
+</div>
