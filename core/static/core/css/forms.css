@@ -1,4 +1,12 @@
-  /* forms.css - estilo geral para TODOS os formulários */
+.form-container {
+  background-color: #fff;
+  padding: 25px 35px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 480px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+}
 
   #formulario-cliente {
     background-color: #fff;
@@ -25,10 +33,23 @@
     margin-bottom: 25px;
     color: #333;
   }
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c5aa0;
+  font-weight: 600;
+}
 
-  .form-group {
-    margin-bottom: 15px;
-  }
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #555;
+  font-weight: 600;
+}
 
   #formulario-cliente label {
     display: block;
@@ -68,7 +89,81 @@
     cursor: pointer;
     transition: background-color 0.3s;
   }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: white;
+  transition: border-color 0.3s ease;
+}
 
-  .btn-submit:hover {
-    background-color: #0056b3;
-  }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #00d4aa;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 50px;
+  max-height: 60px;
+}
+
+.btn-submit {
+  display: block;
+  width: auto;
+  margin: 20px auto 0 auto;
+  padding: 10px 32px;
+  background: linear-gradient(135deg, #00d4aa 0%, #20e3b2 100%);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 3px 12px rgba(0, 212, 170, 0.3);
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #20e3b2 0%, #00d4aa 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(0, 212, 170, 0.4);
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+/* Estilos para formulários de edição */
+.form-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-edit .form-group {
+  margin-bottom: 15px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.form-actions .btn-submit {
+  width: auto;
+  min-width: 120px;
+}

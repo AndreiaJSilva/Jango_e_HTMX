@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<main class="container">
+    <h2 class="titulo">{% block titulo_lista %}{% endblock %}</h2>
+    
+    <div class="search-container">
+        <form method="GET" class="search-form">
+            <input 
+                type="text" 
+                name="search" 
+                class="search-input"
+                placeholder="{% block placeholder_pesquisa %}Pesquisar...{% endblock %}" 
+                value="{{ request.GET.search }}"
+                {% block htmx_attributes %}{% endblock %}
+            >
+            {% if request.GET.search %}
+                <a href="{% block url_limpar %}{% endblock %}" class="search-clear">Limpar</a>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="lista" id="results-container">
+        {% block lista_itens %}{% endblock %}
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'core/pesquisa.html' %}
+
+{% block title %}Lista de Medicamentos{% endblock %}
+{% block titulo_lista %}Medicamentos Cadastrados{% endblock %}
+{% block placeholder_pesquisa %}Buscar por nome ou fabricante{% endblock %}
+{% block url_limpar %}{% url 'listar_medicamentos' %}{% endblock %}
+{% block htmx_attributes %}
+hx-get="{% url 'buscar_medicamentos_htmx' %}"
+hx-target="#results-container"
+hx-trigger="keyup changed delay:300ms"
+{% endblock %}
+
+{% block lista_itens %}
+    {% if medicamentos %}
+        {% for medicamento in medicamentos %}
+        <div class="item" id="medicamento-{{ medicamento.id }}">
+            <span>Nome: {{ medicamento.nomeMedicamento }} | Fabricante: {{ medicamento.fabricante }} | Preço: R$ {{ medicamento.preco }}</span>
+            {% if user.is_authenticated %}
+            <span class="acoes">
+                <a href="#" 
+                   hx-get="{% url 'ver_detalhes_medicamento_htmx' medicamento.id %}"
+                   hx-target="#medicamento-{{ medicamento.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-detalhes">Detalhes</a>
+                <a href="#" 
+                   hx-get="{% url 'editar_medicamento_htmx' medicamento.id %}"
+                   hx-target="#medicamento-{{ medicamento.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-editar">Editar</a>
+                <a href="#" 
+                   hx-get="{% url 'excluir_medicamento_htmx' medicamento.id %}"
+                   hx-target="#medicamento-{{ medicamento.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-excluir">Excluir</a>
+            </span>
+            {% else %}
+            <span class="acoes">
+                <a href="#" 
+                   hx-get="{% url 'ver_detalhes_medicamento_htmx' medicamento.id %}"
+                   hx-target="#medicamento-{{ medicamento.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-detalhes">Detalhes</a>
+            </span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="item">
+            {% if request.GET.search %}
+                Nenhum medicamento encontrado para "{{ request.GET.search }}".
+            {% else %}
+                Nenhum medicamento cadastrado.
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,8 +1,9 @@
 {% extends 'core/base.html' %}
 
-{% block title %}Atualizar Cliente{% endblock %}
+{% block title %}Cadastrar Cliente{% endblock %}
 
 {% block content %}
+
 <div class="form-container">
     <h2>Cadastro de Cliente</h2>
     <form method="post">
@@ -17,12 +18,16 @@
       </div>
       {% endfor %}
       <button type="submit" class="btn-submit">Salvar</button>
+<<<<<<< HEAD:core/templates/core/atualizar_cliente.html
 
       <!-- Botão de cancelar edição -->
       <button type="button" hx-get="{% url 'formulario_cliente' %}" hx-target="#formulario-cliente" hx-swap="outerHTML">
         Cancelar
       </button>
 
+=======
+>>>>>>> 50ed8b84c5a4c1fa951665b1e8ea1a3fcb8d24e2:core/templates/core/clientes/cadastrar.html
     </form>
   </div>
+
 {% endblock %}

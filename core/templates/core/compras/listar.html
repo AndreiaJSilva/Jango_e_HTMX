@@ -1,0 +1,62 @@
+{% extends 'core/pesquisa.html' %}
+
+{% block title %}Lista de Compras{% endblock %}
+{% block titulo_lista %}Lista de Compras{% endblock %}
+{% block placeholder_pesquisa %}Buscar por cliente ou medicamento{% endblock %}
+{% block url_limpar %}{% url 'lista_compras' %}{% endblock %}
+{% block htmx_attributes %}
+hx-get="{% url 'buscar_compras_htmx' %}"
+hx-target="#results-container"
+hx-trigger="input changed delay:300ms, search"
+hx-include="[name='search']"
+{% endblock %}
+
+{% block lista_itens %}
+    {% if compras %}
+        {% for compra in compras %}
+        <div class="item" id="compra-{{ compra.id }}">
+            <span>
+                Cliente: {{ compra.cliente.nome }} | 
+                Medicamento: {{ compra.medicamento.nomeMedicamento }} |
+                Data: {{ compra.data|date:"d/m/Y" }} | 
+                Valor: R$ {{ compra.valor }}
+            </span>
+            {% if user.is_authenticated %}
+            <span class="acoes">
+                <a href="#" 
+                   hx-get="{% url 'ver_detalhes_compra_htmx' compra.id %}"
+                   hx-target="#compra-{{ compra.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-detalhes">Detalhes</a>
+                <a href="#" 
+                   hx-get="{% url 'editar_compra_htmx' compra.id %}"
+                   hx-target="#compra-{{ compra.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-editar">Editar</a>
+                <a href="#" 
+                   hx-get="{% url 'excluir_compra_htmx' compra.id %}"
+                   hx-target="#compra-{{ compra.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-excluir">Excluir</a>
+            </span>
+            {% else %}
+            <span class="acoes">
+                <a href="#" 
+                   hx-get="{% url 'ver_detalhes_compra_htmx' compra.id %}"
+                   hx-target="#compra-{{ compra.id }}"
+                   hx-swap="outerHTML"
+                   class="btn-detalhes">Detalhes</a>
+            </span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="item">
+            {% if request.GET.search %}
+                Nenhuma compra encontrada para "{{ request.GET.search }}".
+            {% else %}
+                Nenhuma compra registrada.
+            {% endif %}
+        </div>  
+    {% endif %}
+{% endblock %}
