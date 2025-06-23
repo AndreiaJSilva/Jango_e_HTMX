@@ -1,7 +1,0 @@
-<div>
-  <p>Tem certeza que deseja excluir {{ cliente.nome }}?</p>
-  <form hx-post="{% url 'excluir_cliente' cliente.id %}" hx-target="#lista-clientes" hx-swap="innerHTML">
-    {% csrf_token %}
-    <button type="submit">Confirmar Exclusão</button>
-  </form>
-</div>

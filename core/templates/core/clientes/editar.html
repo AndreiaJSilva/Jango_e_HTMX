@@ -1,0 +1,47 @@
+<div class="item" id="cliente-{{ cliente.id }}" style="flex-direction: column; align-items: stretch; gap: 10px; padding: 20px;">
+    <form hx-post="{% url 'salvar_cliente_htmx' cliente.id %}"
+          hx-target="#cliente-{{ cliente.id }}"
+          hx-swap="outerHTML">
+        {% csrf_token %}
+        
+        <div style="display: flex; gap: 15px; align-items: center; margin-bottom: 15px;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <label for="id_nome" style="font-weight: bold; white-space: nowrap;">Nome:</label>
+                <input type="text" name="nome" value="{{ cliente.nome }}" required 
+                       style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 220px;">
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <label for="id_cpf" style="font-weight: bold; white-space: nowrap;">CPF:</label>
+                <input type="text" name="cpf" value="{{ cliente.cpf }}" required 
+                       style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 155px;">
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <label for="id_telefone" style="font-weight: bold; white-space: nowrap;">Telefone:</label>
+                <input type="text" name="telefone" value="{{ cliente.telefone }}" required 
+                       style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; width: 120px;">
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 5px; align-items: center; margin-bottom: 15px;">
+            <label for="id_endereco" style="font-weight: bold; white-space: nowrap;">Endereço:</label>
+            <textarea name="endereco" required 
+                      style="padding: 8px; border: 1px solid #ddd; border-radius: 4px; resize: vertical; height: 40px; flex: 1;">{{ cliente.endereco }}</textarea>
+        </div>
+        
+        <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button type="submit" 
+                    style="background-color: #2ecc71; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600;">
+                Salvar
+            </button>
+            <button type="button" 
+                    hx-get="{% url 'cancelar_edicao_htmx' cliente.id %}"
+                    hx-target="#cliente-{{ cliente.id }}"
+                    hx-swap="outerHTML"
+                    style="background-color: #95a5a6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600;">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>

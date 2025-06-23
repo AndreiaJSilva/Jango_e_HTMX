@@ -1,0 +1,60 @@
+<div class="item" id="compra-{{ compra.id }}" style="
+    background-color: #fff5f5; 
+    border: 1px solid #fecaca; 
+    border-left: 4px solid #ef4444;
+    border-radius: 6px;
+    padding: 16px;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+    <div>
+        <div style="font-weight: 600; color: #dc2626; margin-bottom: 4px;">
+            Deseja mesmo excluir?
+        </div>
+        <div style="font-size: 12px; color: #ef4444; margin-bottom: 8px;">
+            Esta ação não pode ser desfeita!
+        </div>
+        <div style="color: #374151; font-size: 14px;">
+            <strong>Cliente:</strong> {{ compra.cliente.nome }} | <strong>Medicamento:</strong> {{ compra.medicamento.nomeMedicamento }}
+        </div>
+    </div>
+    
+    <div class="acoes" style="display: flex; gap: 8px;">
+        <form style="display: inline;" 
+              hx-post="{% url 'confirmar_exclusao_compra_htmx' compra.id %}"
+              hx-target="#compra-{{ compra.id }}"
+              hx-swap="outerHTML">
+            {% csrf_token %}
+            <button type="submit" style="
+                background-color: #dc2626;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+                font-weight: 500;
+            ">
+                ✓ Confirmar
+            </button>
+        </form>
+        
+        <a href="#" 
+           hx-get="{% url 'cancelar_exclusao_compra_htmx' compra.id %}"
+           hx-target="#compra-{{ compra.id }}"
+           hx-swap="outerHTML"
+           style="
+               background-color: #6b7280;
+               color: white;
+               text-decoration: none;
+               padding: 8px 16px;
+               border-radius: 4px;
+               font-size: 14px;
+               font-weight: 500;
+           ">
+           ✗ Cancelar
+        </a>
+    </div>
+</div>

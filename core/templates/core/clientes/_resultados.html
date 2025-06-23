@@ -1,0 +1,42 @@
+{% if clientes %}
+    {% for cliente in clientes %}
+    <div class="item" id="cliente-{{ cliente.id }}">
+        <span>Nome: {{ cliente.nome }} | CPF: {{ cliente.cpf }} | Telefone: {{ cliente.telefone }}</span>
+        {% if user.is_authenticated %}
+        <span class="acoes">
+            <a href="#" 
+               hx-get="{% url 'ver_detalhes_cliente_htmx' cliente.id %}"
+               hx-target="#cliente-{{ cliente.id }}"
+               hx-swap="outerHTML"
+               class="btn-detalhes">Detalhes</a>
+            <a href="#" 
+               hx-get="{% url 'editar_cliente_htmx' cliente.id %}"
+               hx-target="#cliente-{{ cliente.id }}"
+               hx-swap="outerHTML"
+               class="btn-editar">Editar</a>
+            <a href="#" 
+               hx-get="{% url 'excluir_cliente_htmx' cliente.id %}"
+               hx-target="#cliente-{{ cliente.id }}"
+               hx-swap="outerHTML"
+               class="btn-excluir">Excluir</a>
+        </span>
+        {% else %}
+        <span class="acoes">
+            <a href="#" 
+               hx-get="{% url 'ver_detalhes_cliente_htmx' cliente.id %}"
+               hx-target="#cliente-{{ cliente.id }}"
+               hx-swap="outerHTML"
+               class="btn-detalhes">Detalhes</a>
+        </span>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="item">
+        {% if request.GET.search %}
+            Nenhum cliente encontrado para "{{ request.GET.search }}".
+        {% else %}
+            Nenhum cliente cadastrado.
+        {% endif %}
+    </div>
+{% endif %}

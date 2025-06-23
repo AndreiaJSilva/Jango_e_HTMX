@@ -1,73 +1,96 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>{% block title %}Lavras Pharm{% endblock %}</title>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
-  <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Lavras Farm{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static 'core/css/base.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/forms.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
 </head>
-
 <body>
+    <!-- Camada de fundo com a imagem -->
+    <div class="background-layer"></div>
+    
+    <!-- Camada de overlay para o efeito de transparência -->
+    <div class="background-overlay"></div>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <ul class="menu">
-      <li><a href="/">Home</a></li>
+    <div class="container">
+        <header class="header">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        LAVRAS<br>
+                        <span class="farm">FARM</span>
+                    </div>
+                </div>
 
-      <li>
-        Clientes
-        <ul class="submenu">
-          {% if user.is_authenticated %}
-          <li><a href="{% url 'cadastrar_cliente' %}">Cadastrar</a></li>
-          {% endif %}
-          <li><a href="{% url 'listar_clientes' %}">Visualizar Cadastro</a></li>
-        </ul>
-      </li>
-  
-      <li>
-        Medicamentos
-        <ul class="submenu">
-          {% if user.is_authenticated %}
-          <li><a href="{% url 'cadastrar_medicamento' %}">Cadastrar</a></li>
-          {% endif %}
-          <li><a href="{% url 'listar_medicamentos' %}">Medicamentos Cadastrados</a></li>
-        </ul>
-      </li>
-  
-      <li>
-        Compras
-        <ul class="submenu">
-          {% if user.is_authenticated %}
-          <li><a href="{% url 'registrar_compra' %}">Registrar</a></li>
-          {% endif %}
-          <li><a href="{% url 'lista_compras' %}">Compras Registradas</a></li>
-        </ul>
-      </li>
-  
-      <li>
-        {% if user.is_authenticated %}
-        <form method="post" action="{% url 'logout' %}" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit" class="logout-link">Sair</button>
-        </form>
-        {% else %}
-        <a href="{% url 'login' %}">Entrar</a>
-        {% endif %}
-      </li>
-    </ul>
-  </nav>
+                <nav class="nav-menu">
+                    <a href="/" class="nav-item">
+                        <div class="nav-icon" data-type="home"></div>
+                        <span class="nav-label">HOME</span>
+                    </a>
+                    <div class="nav-item submenu">
+                        <div class="nav-icon" data-type="clientes"></div>
+                        <span class="nav-label">CLIENTES</span>
+                        <div class="submenu-content">
+                            <a href="{% url 'cadastrar_cliente' %}">Cadastrar</a>
+                            <a href="{% url 'listar_clientes' %}">Visualizar</a>
+                        </div>
+                    </div>
+                    <div class="nav-item submenu">
+                        <div class="nav-icon" data-type="medicamentos"></div>
+                        <span class="nav-label">MEDICAMENTOS</span>
+                        <div class="submenu-content">
+                            <a href="{% url 'cadastrar_medicamento' %}">Cadastrar</a>
+                            <a href="{% url 'listar_medicamentos' %}">Visualizar</a>
+                        </div>
+                    </div>
+                    <div class="nav-item submenu">
+                        <div class="nav-icon" data-type="compras"></div>
+                        <span class="nav-label">COMPRAS</span>
+                        <div class="submenu-content">
+                            <a href="{% url 'registrar_compra' %}">Cadastrar</a>
+                            <a href="{% url 'lista_compras' %}">Visualizar</a>
+                        </div>
+                    </div>
+                </nav>
 
-  <!-- Conteúdo principal -->
-  <main id="principal"> 
-    {% block content %}
-    {% endblock %}
-  </main>
+                {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}" style="display:inline;" onsubmit="return confirmarSaida()">
+                    {% csrf_token %}
+                    <button type="submit" class="exit-btn">
+                        <span class="exit-icon"></span>
+                        SAIR
+                    </button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}" class="exit-btn">
+                    <span class="exit-icon"></span>
+                    ENTRAR
+                </a>
+                {% endif %}
+            </div>
+        </header>
 
+        <main class="main-content">
+            {% block content %}
+            <h1 class="page-title">CLIENTES CADASTRADOS</h1>
+            <div class="clients-content">
+                <p>Conteúdo dos clientes cadastrados será exibido aqui...</p>
+            </div>
+            {% endblock %}
+        </main>
+    </div>
+
+    <script>
+        function confirmarSaida() {
+            return confirm('Tem certeza que deseja sair?');
+        }
+    </script>
 </body>
-
 </html>

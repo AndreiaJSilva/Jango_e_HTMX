@@ -1,0 +1,30 @@
+<div class="item" id="medicamento-{{ medicamento.id }}">
+    <span>Nome: {{ medicamento.nomeMedicamento }} | Fabricante: {{ medicamento.fabricante }} | Preço: R$ {{ medicamento.preco }}</span>
+    {% if user.is_authenticated %}
+    <span class="acoes">
+        <a href="#" 
+           hx-get="{% url 'ver_detalhes_medicamento_htmx' medicamento.id %}"
+           hx-target="#medicamento-{{ medicamento.id }}"
+           hx-swap="outerHTML"
+           class="btn-detalhes">Detalhes</a>
+        <a href="#" 
+           hx-get="{% url 'editar_medicamento_htmx' medicamento.id %}"
+           hx-target="#medicamento-{{ medicamento.id }}"
+           hx-swap="outerHTML"
+           class="btn-editar">Editar</a>
+        <a href="#" 
+           hx-get="{% url 'excluir_medicamento_htmx' medicamento.id %}"
+           hx-target="#medicamento-{{ medicamento.id }}"
+           hx-swap="outerHTML"
+           class="btn-excluir">Excluir</a>
+    </span>
+    {% else %}
+    <span class="acoes">
+        <a href="#" 
+           hx-get="{% url 'ver_detalhes_medicamento_htmx' medicamento.id %}"
+           hx-target="#medicamento-{{ medicamento.id }}"
+           hx-swap="outerHTML"
+           class="btn-detalhes">Detalhes</a>
+    </span>
+    {% endif %}
+</div>

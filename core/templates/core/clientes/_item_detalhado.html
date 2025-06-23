@@ -1,0 +1,39 @@
+<div class="item item-detalhado" id="cliente-{{ cliente.id }}">
+    <div class="info-basica">
+        <span><strong>Nome:</strong> {{ cliente.nome }}</span>
+        <span><strong>CPF:</strong> {{ cliente.cpf }}</span>
+        <span><strong>Telefone:</strong> {{ cliente.telefone }}</span>
+    </div>
+    
+    <div class="info-detalhada">
+        <span><strong>Endereço:</strong> {{ cliente.endereco }}</span>
+    </div>
+    
+    {% if user.is_authenticated %}
+    <div class="acoes">
+        <a href="#" 
+           hx-get="{% url 'ocultar_detalhes_cliente_htmx' cliente.id %}"
+           hx-target="#cliente-{{ cliente.id }}"
+           hx-swap="outerHTML"
+           class="btn-ocultar">Ocultar</a>
+        <a href="#" 
+           hx-get="{% url 'editar_cliente_htmx' cliente.id %}"
+           hx-target="#cliente-{{ cliente.id }}"
+           hx-swap="outerHTML"
+           class="btn-editar">Editar</a>
+        <a href="#" 
+           hx-get="{% url 'excluir_cliente_htmx' cliente.id %}"
+           hx-target="#cliente-{{ cliente.id }}"
+           hx-swap="outerHTML"
+           class="btn-excluir">Excluir</a>
+    </div>
+    {% else %}
+    <div class="acoes">
+        <a href="#" 
+           hx-get="{% url 'ocultar_detalhes_cliente_htmx' cliente.id %}"
+           hx-target="#cliente-{{ cliente.id }}"
+           hx-swap="outerHTML"
+           class="btn-ocultar">Ocultar</a>
+    </div>
+    {% endif %}
+</div> 
